@@ -51,7 +51,7 @@ public class ConnectivityTestApiController implements ConnectivityTestApi {
 
     public ResponseEntity<Response> connectivityTest() {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
+        if (accept != null) {
             try {
                 if(BCGateway.ConnectivityTest()){
                     return new ResponseEntity<Response>(objectMapper.readValue("{\n  \"response\" : \"successful request\",\n  \"id\" : \"pong\"\n}", Response.class), HttpStatus.OK);
