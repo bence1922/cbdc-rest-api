@@ -21,11 +21,11 @@ public class BCGateway {
     static Gateway.Builder builder;
     public static void init() throws IOException, ContractException {
         // Load an existing wallet holding identities used to access the network.
-        Path walletDirectory = Paths.get("wallet");
+        Path walletDirectory = Paths.get("src/wallet");
         Wallet wallet = Wallet.createFileSystemWallet(walletDirectory);
 
         // Path to a common connection profile describing the network.
-        Path networkConfigFile = Paths.get("crypto-config.json");
+        Path networkConfigFile = Paths.get("src/crypto-config.json");
 
         // Configure the gateway connection used to access the network.
         builder = Gateway.createBuilder()
