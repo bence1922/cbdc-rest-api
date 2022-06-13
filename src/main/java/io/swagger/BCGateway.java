@@ -45,7 +45,7 @@ public class BCGateway {
             return e.getMessage();
         }
     }
-    public static String ApplyForGreenCbdc(String address, String lockedUserAmount, String requestedAmount, String verifierDocUri){
+    public static String ApplyForGreenCbdc(String address, String lockedUserAmount, String requestedAmount, String totalPayout, String verifierDocUri){
         try (Gateway gateway = builder.connect()) {
             Network network = gateway.getNetwork("epengo-channel");
             Contract contract = network.getContract("cbdc");
@@ -53,6 +53,10 @@ public class BCGateway {
             Transaction t = contract.createTransaction("applyForGreenCbdc");
             t.submit(address, lockedUserAmount,requestedAmount,verifierDocUri);
             System.out.println("Apply for green CBDC On Fabric done.");
+
+            t = contract.createTransaction("approveGreenCbdc");
+            t.submit(address,lockedUserAmount+requestedAmount,"60");
+            System.out.println("Approve green CBDC On Fabric done.");
             return "successful green CBDC request";
         }
         catch (Exception e){
@@ -109,7 +113,7 @@ public class BCGateway {
             FabricProposalResponse.ProposalResponsePayload pl = FabricProposalResponse.ProposalResponsePayload.parseFrom(ti.getProcessedTransaction().getTransactionEnvelope().getPayload());
             char per = 92;
             String[] data = pl.toString().replace(per+"","separate").split("separate");
-            int balanceIndex = indexOfIntArray(data, "btransfer");
+            int balanceIndex = indexOfIntArray(data, "022transferFromPocket");
             
             String from1 = data[balanceIndex+1].substring(2);
             String to1 = data[balanceIndex+2].substring(2);
