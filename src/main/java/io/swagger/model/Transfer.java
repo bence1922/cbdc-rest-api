@@ -14,18 +14,21 @@ import javax.validation.constraints.*;
  */
 @Schema(description = "Information for transfer.")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 
 
 public class Transfer   {
-  @JsonProperty("fromAddress")
-  private String fromAddress = null;
+  @JsonProperty("from")
+  private String from = null;
 
-  @JsonProperty("toAddress")
-  private String toAddress = null;
+  @JsonProperty("to")
+  private String to = null;
 
   @JsonProperty("amount")
   private BigDecimal amount = null;
+
+  @JsonProperty("pocket")
+  private String pocket = null;
 
   @JsonProperty("nonce")
   private BigDecimal nonce = null;
@@ -39,44 +42,44 @@ public class Transfer   {
   @JsonProperty("s")
   private String s = null;
 
-  public Transfer fromAddress(String fromAddress) {
-    this.fromAddress = fromAddress;
+  public Transfer from(String from) {
+    this.from = from;
     return this;
   }
 
   /**
-   * Get fromAddress
-   * @return fromAddress
+   * Get from
+   * @return from
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getFromAddress() {
-    return fromAddress;
+    public String getFrom() {
+    return from;
   }
 
-  public void setFromAddress(String fromAddress) {
-    this.fromAddress = fromAddress;
+  public void setFrom(String from) {
+    this.from = from;
   }
 
-  public Transfer toAddress(String toAddress) {
-    this.toAddress = toAddress;
+  public Transfer to(String to) {
+    this.to = to;
     return this;
   }
 
   /**
-   * Get toAddress
-   * @return toAddress
+   * Get to
+   * @return to
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getToAddress() {
-    return toAddress;
+    public String getTo() {
+    return to;
   }
 
-  public void setToAddress(String toAddress) {
-    this.toAddress = toAddress;
+  public void setTo(String to) {
+    this.to = to;
   }
 
   public Transfer amount(BigDecimal amount) {
@@ -98,6 +101,26 @@ public class Transfer   {
 
   public void setAmount(BigDecimal amount) {
     this.amount = amount;
+  }
+
+  public Transfer pocket(String pocket) {
+    this.pocket = pocket;
+    return this;
+  }
+
+  /**
+   * Get pocket
+   * @return pocket
+   **/
+  @Schema(required = true, description = "")
+      @NotNull
+
+    public String getPocket() {
+    return pocket;
+  }
+
+  public void setPocket(String pocket) {
+    this.pocket = pocket;
   }
 
   public Transfer nonce(BigDecimal nonce) {
@@ -191,9 +214,10 @@ public class Transfer   {
       return false;
     }
     Transfer transfer = (Transfer) o;
-    return Objects.equals(this.fromAddress, transfer.fromAddress) &&
-        Objects.equals(this.toAddress, transfer.toAddress) &&
+    return Objects.equals(this.from, transfer.from) &&
+        Objects.equals(this.to, transfer.to) &&
         Objects.equals(this.amount, transfer.amount) &&
+        Objects.equals(this.pocket, transfer.pocket) &&
         Objects.equals(this.nonce, transfer.nonce) &&
         Objects.equals(this.v, transfer.v) &&
         Objects.equals(this.r, transfer.r) &&
@@ -202,7 +226,7 @@ public class Transfer   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(fromAddress, toAddress, amount, nonce, v, r, s);
+    return Objects.hash(from, to, amount, pocket, nonce, v, r, s);
   }
 
   @Override
@@ -210,9 +234,10 @@ public class Transfer   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Transfer {\n");
     
-    sb.append("    fromAddress: ").append(toIndentedString(fromAddress)).append("\n");
-    sb.append("    toAddress: ").append(toIndentedString(toAddress)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    pocket: ").append(toIndentedString(pocket)).append("\n");
     sb.append("    nonce: ").append(toIndentedString(nonce)).append("\n");
     sb.append("    v: ").append(toIndentedString(v)).append("\n");
     sb.append("    r: ").append(toIndentedString(r)).append("\n");

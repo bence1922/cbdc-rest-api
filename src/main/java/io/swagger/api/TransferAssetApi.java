@@ -33,15 +33,15 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 @Validated
 public interface TransferAssetApi {
 
     @Operation(summary = "Transfer asset.", description = "", tags={ "cbdc-transfer" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Transaction request successful.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))),
+        @ApiResponse(responseCode = "200", description = "Transfer request successful. The response contains the generated transactionId.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))),
         
-        @ApiResponse(responseCode = "400", description = "Transaction failed.") })
+        @ApiResponse(responseCode = "400", description = "Transfer failed.") })
     @RequestMapping(value = "/transferAsset",
         produces = { "application/json" }, 
         consumes = { "application/json" }, 

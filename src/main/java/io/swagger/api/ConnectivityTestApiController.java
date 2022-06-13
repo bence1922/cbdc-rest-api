@@ -1,6 +1,6 @@
 package io.swagger.api;
 
-import io.swagger.BCGateway.BCGateway;
+import io.swagger.BCGateway;
 import io.swagger.model.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 @RestController
 public class ConnectivityTestApiController implements ConnectivityTestApi {
 
@@ -51,19 +51,12 @@ public class ConnectivityTestApiController implements ConnectivityTestApi {
 
     public ResponseEntity<Response> connectivityTest() {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                if(BCGateway.ConnectivityTest()){
-                    return new ResponseEntity<Response>(objectMapper.readValue("{\n  \"response\" : \"successful request\",\n  \"id\" : \"pong\"\n}", Response.class), HttpStatus.OK);
-                }
-                return new ResponseEntity<Response>(objectMapper.readValue("{\n  \"response\" : \"couldn't access the fabric network\",\n  \"id\" : \"0\"\n}", Response.class), HttpStatus.OK);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Response>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        if (accept != null) {
+            Response res = new Response();
+            res.setResponse(BCGateway.ConnectivityTest());
+            return new ResponseEntity<Response>(res, HttpStatus.OK);
         }
-
-        return new ResponseEntity<Response>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<Response>(HttpStatus.BAD_REQUEST);
     }
 
 }

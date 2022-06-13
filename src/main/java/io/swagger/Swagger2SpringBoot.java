@@ -1,6 +1,5 @@
 package io.swagger;
 
-import io.swagger.BCGateway.BCGateway;
 import io.swagger.configuration.LocalDateConverter;
 import io.swagger.configuration.LocalDateTimeConverter;
 
@@ -44,7 +43,7 @@ public class Swagger2SpringBoot implements CommandLineRunner {
 
     class ExitException extends RuntimeException implements ExitCodeGenerator {
         private static final long serialVersionUID = 1L;
- 
+
         @Override
         public int getExitCode() {
             return 10;

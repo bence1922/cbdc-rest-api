@@ -1,6 +1,6 @@
 package io.swagger.api;
 
-import io.swagger.BCGateway.BCGateway;
+import io.swagger.BCGateway;
 import io.swagger.model.Response;
 import io.swagger.model.Transfer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 @RestController
 public class TransferAssetApiController implements TransferAssetApi {
 
@@ -52,22 +52,13 @@ public class TransferAssetApiController implements TransferAssetApi {
 
     public ResponseEntity<Response> transferAsset(@Parameter(in = ParameterIn.DEFAULT, description = "Add informations for transaction.", required=true, schema=@Schema()) @Valid @RequestBody Transfer body) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                String transferID = BCGateway.Transfer(body.getFromAddress(), body.getToAddress(), String.valueOf(body.getAmount()),String.valueOf(body.getNonce()), body.getV(), body.getR(), body.getS());
-                Response res = new Response();
-                if (transferID != null)
-                    res.setResponse(transferID);
-                else
-                    res.setResponse("transferFaild");
-                return new ResponseEntity<Response>(res, HttpStatus.OK);
-            } catch (Exception e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Response>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        if (accept != null) {
+            Response res = new Response();
+            res.setResponse(BCGateway.Transfer(body.getFrom(),body.getTo(),
+                String.valueOf(body.getAmount()),body.getPocket(), String.valueOf(body.getNonce()),body.getV(),body.getR(),body.getS()));
+            return new ResponseEntity<Response>(res, HttpStatus.OK);
         }
-
-        return new ResponseEntity<Response>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<Response>(HttpStatus.BAD_REQUEST);
     }
 
 }

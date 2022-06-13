@@ -1,6 +1,6 @@
 package io.swagger.api;
 
-import io.swagger.BCGateway.BCGateway;
+import io.swagger.BCGateway;
 import io.swagger.model.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T09:37:19.856Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 @RestController
 public class NonceApiController implements NonceApi {
 
@@ -53,20 +53,10 @@ public class NonceApiController implements NonceApi {
         String accept = request.getHeader("Accept");
         if (accept != null) {
             Response res = new Response();
-            try {
-                int nonce = BCGateway.getNonce(address);
-                res.setResponse(String.valueOf(nonce));
-                if (nonce > -1){
-                    return new ResponseEntity<Response>(res,HttpStatus.OK);
-                }
-                return new ResponseEntity<Response>(objectMapper.readValue("{\n  \"response\" : \"-1\",\n  \"id\" : \"0\"\n}", Response.class), HttpStatus.OK);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Response>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            res.setResponse(BCGateway.getNonce(address));
+            return new ResponseEntity<Response>(res, HttpStatus.OK);
         }
-
-        return new ResponseEntity<Response>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<Response>(HttpStatus.BAD_REQUEST);
     }
 
 }

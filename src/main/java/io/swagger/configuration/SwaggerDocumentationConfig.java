@@ -13,7 +13,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 @Configuration
 public class SwaggerDocumentationConfig {
 
@@ -30,12 +30,12 @@ public class SwaggerDocumentationConfig {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("CBDC Gateway API")
-            .description("Hyperledger Fabric Gateway API for asset transfer.")
+            .title("CBDC Payment Gateway")
+            .description("Hyperledger Fabric Gateway API for CBDC transfer.")
             .license("")
             .licenseUrl("http://unlicense.org")
             .termsOfServiceUrl("")
-            .version("1.0.0")
+            .version("1.2.0")
             .contact(new Contact("","", "benyakbence@edu.bme.hu"))
             .build();
     }
@@ -44,10 +44,10 @@ public class SwaggerDocumentationConfig {
     public OpenAPI openApi() {
         return new OpenAPI()
             .info(new Info()
-                .title("CBDC Gateway API")
-                .description("Hyperledger Fabric Gateway API for asset transfer.")
+                .title("CBDC Payment Gateway")
+                .description("Hyperledger Fabric Gateway API for CBDC transfer.")
                 .termsOfService("")
-                .version("1.0.0")
+                .version("1.2.0")
                 .license(new License()
                     .name("")
                     .url("http://unlicense.org"))

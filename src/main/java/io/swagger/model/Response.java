@@ -9,11 +9,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * Response object contains the response to the request or an error message. 
+ * Response object contains the response to the request or an error message.
  */
-@Schema(description = "Response object contains the response to the request or an error message. ")
+@Schema(description = "Response object contains the response to the request or an error message.")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 
 
 public class Response   {
@@ -29,7 +29,7 @@ public class Response   {
    * Get response
    * @return response
    **/
-  @Schema(example = "transferID", required = true, description = "")
+  @Schema(required = true, description = "")
       @NotNull
 
     public String getResponse() {

@@ -14,15 +14,15 @@ import javax.validation.constraints.*;
  */
 @Schema(description = "Information for transfer check.")
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-05-26T07:47:02.189Z[GMT]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-13T09:09:20.233Z[GMT]")
 
 
 public class TransferInformation   {
-  @JsonProperty("fromAddress")
-  private String fromAddress = null;
+  @JsonProperty("from")
+  private String from = null;
 
-  @JsonProperty("toAddress")
-  private String toAddress = null;
+  @JsonProperty("to")
+  private String to = null;
 
   @JsonProperty("amount")
   private BigDecimal amount = null;
@@ -30,44 +30,44 @@ public class TransferInformation   {
   @JsonProperty("transactionId")
   private String transactionId = null;
 
-  public TransferInformation fromAddress(String fromAddress) {
-    this.fromAddress = fromAddress;
+  public TransferInformation from(String from) {
+    this.from = from;
     return this;
   }
 
   /**
-   * Get fromAddress
-   * @return fromAddress
+   * Get from
+   * @return from
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getFromAddress() {
-    return fromAddress;
+    public String getFrom() {
+    return from;
   }
 
-  public void setFromAddress(String fromAddress) {
-    this.fromAddress = fromAddress;
+  public void setFrom(String from) {
+    this.from = from;
   }
 
-  public TransferInformation toAddress(String toAddress) {
-    this.toAddress = toAddress;
+  public TransferInformation to(String to) {
+    this.to = to;
     return this;
   }
 
   /**
-   * Get toAddress
-   * @return toAddress
+   * Get to
+   * @return to
    **/
   @Schema(required = true, description = "")
       @NotNull
 
-    public String getToAddress() {
-    return toAddress;
+    public String getTo() {
+    return to;
   }
 
-  public void setToAddress(String toAddress) {
-    this.toAddress = toAddress;
+  public void setTo(String to) {
+    this.to = to;
   }
 
   public TransferInformation amount(BigDecimal amount) {
@@ -121,15 +121,15 @@ public class TransferInformation   {
       return false;
     }
     TransferInformation transferInformation = (TransferInformation) o;
-    return Objects.equals(this.fromAddress, transferInformation.fromAddress) &&
-        Objects.equals(this.toAddress, transferInformation.toAddress) &&
+    return Objects.equals(this.from, transferInformation.from) &&
+        Objects.equals(this.to, transferInformation.to) &&
         Objects.equals(this.amount, transferInformation.amount) &&
         Objects.equals(this.transactionId, transferInformation.transactionId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fromAddress, toAddress, amount, transactionId);
+    return Objects.hash(from, to, amount, transactionId);
   }
 
   @Override
@@ -137,8 +137,8 @@ public class TransferInformation   {
     StringBuilder sb = new StringBuilder();
     sb.append("class TransferInformation {\n");
     
-    sb.append("    fromAddress: ").append(toIndentedString(fromAddress)).append("\n");
-    sb.append("    toAddress: ").append(toIndentedString(toAddress)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    transactionId: ").append(toIndentedString(transactionId)).append("\n");
     sb.append("}");
