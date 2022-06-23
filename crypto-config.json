@@ -26,6 +26,29 @@
           ]
       }
   },
+  "channels": {
+    "epengo": {
+        "orderers": [
+            "orderer1.mit.bme.hu",
+            "orderer2.mit.bme.hu",
+            "orderer1.tmit.bme.hu"
+        ],
+        "peers": {
+            "peer1.mit.bme.hu": {
+                "endorsingPeer": true,
+                "chaincodeQuery": true,
+                "ledgerQuery": true,
+                "eventSource": true
+            },
+            "peer1.tmit.bme.hu": {
+                "endorsingPeer": true,
+                "chaincodeQuery": true,
+                "ledgerQuery": true,
+                "eventSource": true
+            }
+        }
+    }
+  },
   "orderers": {
       "orderer1.mit.bme.hu": {
           "url": "grpcs://vm.niif.cloud.bme.hu:20784",
@@ -74,5 +97,5 @@
               "path": "organizations/tmit.bme.hu/peers/peer1.tmit.bme.hu/tls/tlscacerts/tls-ca-tmit-bme-hu-7110.pem"
           }
       }
-  }
+    } 
 }

@@ -14,6 +14,7 @@ import org.hyperledger.fabric.gateway.Wallet;
 import org.hyperledger.fabric.gateway.Wallets;
 import org.hyperledger.fabric.protos.common.Common;
 import org.hyperledger.fabric.sdk.BlockchainInfo;
+import org.hyperledger.fabric.sdk.Peer;
 import org.hyperledger.fabric.sdk.TransactionInfo;
 
 
@@ -49,12 +50,11 @@ public class BCGateway {
         try (Gateway gateway = builder.connect()) {
             Network network = gateway.getNetwork("epengo");
             Contract contract = network.getContract("epengo");
-
-            Transaction t = contract.createTransaction("applyForGreenCbdc");
+            Transaction t = contract.createTransaction("applyForGreenCbdc").setEndorsingPeers(network.getChannel().getPeers());
             t.submit(address, lockedUserAmount,requestedAmount,verifierDocUri);
             System.out.println("Apply for green CBDC On Fabric done.");
 
-            t = contract.createTransaction("approveGreenCbdc");
+            t = contract.createTransaction("approveGreenCbdc").setEndorsingPeers(network.getChannel().getPeers());;
             t.submit(address,totalPayout,"60");
             System.out.println("Approve green CBDC On Fabric done.");
             return "successful green CBDC request";
@@ -68,8 +68,8 @@ public class BCGateway {
         try (Gateway gateway = builder.connect()) {
             Network network = gateway.getNetwork("epengo");
             Contract contract = network.getContract("epengo");
-
-            Transaction t = contract.createTransaction("transferFromPocket");
+            
+            Transaction t = contract.createTransaction("transferFromPocket").setEndorsingPeers(network.getChannel().getPeers());
             t.submit(from, to,value,pocket,nextNonce, v, r, s);
             System.out.println("Transfer On Fabric done.");
             String transferID = t.getTransactionId();
@@ -109,7 +109,7 @@ public class BCGateway {
             if(from.equals(from1) && to.equals(to1) && transfered(data)>-1 && ti.getValidationCode().toString().equals("VALID")){
                 return "VALID";
             }*/
-            return "VALID";
+            return ti.getValidationCode() + "";
         } catch (Exception e) {
             System.out.print(e.getMessage());
             return "INVALID";
