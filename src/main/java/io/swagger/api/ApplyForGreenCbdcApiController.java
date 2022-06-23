@@ -53,6 +53,8 @@ public class ApplyForGreenCbdcApiController implements ApplyForGreenCbdcApi {
             Response res = new Response();
             res.setResponse(BCGateway.ApplyForGreenCbdc(body.getAddress(),String.valueOf(body.getLockedUserAmount()),
                 String.valueOf(body.getRequestedAmount()),  String.valueOf(body.getRequestedAmount().add(body.getLockedUserAmount())),String.valueOf(body.getVerifierDocUri())));
+            System.out.println(String.valueOf(body.getLockedUserAmount()) + ":loc, req:"+
+                String.valueOf(body.getRequestedAmount())+" "+  String.valueOf(body.getRequestedAmount().add(body.getLockedUserAmount())));
             return new ResponseEntity<Response>(res, HttpStatus.OK);
         }
         return new ResponseEntity<Response>(HttpStatus.BAD_REQUEST);

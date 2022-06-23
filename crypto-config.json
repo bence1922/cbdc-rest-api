@@ -1,109 +1,78 @@
 {
-  "name": "cbdc-notls-ca-network",
-  "version": "1.0.0",
+  "name": "cbdc-network",
+  "version": "1.1",
   "client": {
-    "organization": "FIOrg",
-    "connection": {
-      "timeout": {
-        "peer": {
-          "endorser": "300"
-        },
-        "orderer": "300"
+      "organization": "tmit",
+      "connection": {
+          "timeout": {
+              "peer": {
+                  "endorser": "300"
+              },
+              "orderer": "300"
+          }
       }
-    }
-  },
-  "channels": {
-    "epengo-channel": {
-      "orderers": [
-          "orderer0.example.com"
-      ],
-      "peers": {
-        "peer0.centralbank.example.com": {
-          "endorsingPeer": true,
-          "chaincodeQuery": true,
-          "ledgerQuery": true,
-          "eventSource": true
-        },
-        "peer0.fi.example.com": {
-          "endorsingPeer": true,
-          "chaincodeQuery": true,
-          "ledgerQuery": true,
-          "eventSource": true
-        }
-      }
-    }
   },
   "organizations": {
-    "CentralBankOrg": {
-      "mspid": "CentralBankOrgMSP",
-      "peers": [
-          "peer0.centralbank.example.com"
-      ],
-      "certificateAuthorities": [
-          "ca-centralbank"
-      ],
-      "adminPrivateKey": {
-        "path": "crypto-config/peerOrganizations/centralbank.example.com/users/Admin@centralbank.example.com/msp/keystore/key.pem"
+      "mit": {
+          "mspid": "mit",
+          "peers": [
+              "peer1.mit.bme.hu"
+          ]
       },
-      "signedCert": {
-        "path": "crypto-config/peerOrganizations/centralbank.example.com/users/Admin@centralbank.example.com/msp/signcerts/Admin@centralbank.example.com-cert.pem"
+      "tmit": {
+          "mspid": "tmit",
+          "peers": [
+              "peer1.tmit.bme.hu"
+          ]
       }
-    },
-    "FIOrg": {
-      "mspid": "FIOrgMSP",
-      "peers": [
-          "peer0.fi.example.com"
-      ],
-      "certificateAuthorities": [
-          "ca-fi"
-      ],
-      "adminPrivateKey": {
-        "path": "crypto-config/peerOrganizations/fi.example.com/users/Admin@fi.example.com/msp/keystore/key.pem"
-      },
-      "signedCert": {
-        "path": "crypto-config/peerOrganizations/fi.example.com/users/Admin@fi.example.com/msp/signcerts/Admin@fi.example.com-cert.pem"
-      }
-    }
   },
   "orderers": {
-    "orderer0.example.com": {
-      "url": "grpc://vm.niif.cloud.bme.hu:2045"
-    }
+      "orderer1.mit.bme.hu": {
+          "url": "grpcs://vm.niif.cloud.bme.hu:20784",
+          "grpcOptions": {
+              "ssl-target-name-override": "orderer1.mit.bme.hu"
+          },
+          "tlsCACerts": {
+              "path": "organizations/mit.bme.hu/orderers/orderer1.mit.bme.hu/tls/tlscacerts/tls-ca-mit-bme-hu-7010.pem"
+          }
+      },
+      "orderer2.mit.bme.hu": {
+          "url": "grpcs://vm.niif.cloud.bme.hu:11900",
+          "grpcOptions": {
+              "ssl-target-name-override": "orderer2.mit.bme.hu"
+          },
+          "tlsCACerts": {
+              "path": "organizations/mit.bme.hu/orderers/orderer2.mit.bme.hu/tls/tlscacerts/tls-ca-mit-bme-hu-7010.pem"
+          }
+      },
+      "orderer1.tmit.bme.hu": {
+          "url": "grpcs://vm.niif.cloud.bme.hu:17498",
+          "grpcOptions": {
+              "ssl-target-name-override": "orderer1.tmit.bme.hu"
+          },
+          "tlsCACerts": {
+              "path": "organizations/tmit.bme.hu/orderers/orderer1.tmit.bme.hu/tls/tlscacerts/tls-ca-tmit-bme-hu-7110.pem"
+          }
+      }
   },
   "peers": {
-    "peer0.centralbank.example.com": {
-      "url": "grpc://vm.niif.cloud.bme.hu:9665"
-    },
-    "peer0.fi.example.com": {
-      "url": "grpc://vm.niif.cloud.bme.hu:2667"
-    }
-  },
-  "certificateAuthorities": {
-    "ca-centralbank": {
-      "url": "http://vm.niif.cloud.bme.hu:15857",
-      "httpOptions": {
-        "verify": false
+      "peer1.mit.bme.hu": {
+          "url": "grpcs://vm.niif.cloud.bme.hu:16444",
+          "grpcOptions": {
+              "ssl-target-name-override": "peer1.mit.bme.hu"
+          },
+          "tlsCACerts": {
+              "path": "organizations/mit.bme.hu/peers/peer1.mit.bme.hu/tls/tlscacerts/tls-ca-mit-bme-hu-7010.pem"
+          }
       },
-      "registrar": [
-        {
-          "enrollId": "admin",
-          "enrollSecret": "adminpw"
-        }
-      ],
-      "caName": "ca-centralbank"
-    },
-    "ca-fi": {
-      "url": "http:// vm.niif.cloud.bme.hu:11430",
-      "httpOptions": {
-        "verify": false
-      },
-      "registrar": [
-        {
-          "enrollId": "admin",
-          "enrollSecret": "adminpw"
-        }
-      ],
-      "caName": "ca-fi"
-    }
+      "peer1.tmit.bme.hu": {
+          "url": "grpcs://vm.niif.cloud.bme.hu:20373",
+          "grpcOptions": {
+              "ssl-target-name-override": "peer1.tmit.bme.hu"
+          },
+          "tlsCACerts": {
+              "path": "organizations/tmit.bme.hu/peers/peer1.tmit.bme.hu/tls/tlscacerts/tls-ca-tmit-bme-hu-7110.pem"
+          }
+      }
   }
 }
