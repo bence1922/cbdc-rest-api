@@ -72,18 +72,7 @@ public class BCGateway {
             Transaction t = contract.createTransaction("transferFromPocket");
             t.submit(from, to,value,pocket,nextNonce, v, r, s);
             System.out.println("Transfer On Fabric done.");
-
-            byte[] blockHash;
-            BlockchainInfo bci =  network.getChannel().queryBlockchainInfo();
-            byte[] curBlockHash = bci.getCurrentBlockHash();
-            if (network.getChannel().queryBlockByHash(curBlockHash).getTransactionCount() < 1)
-                blockHash = bci.getPreviousBlockHash();
-            else
-                blockHash = curBlockHash;
-            Common.BlockData bd = network.getChannel().queryBlockByHash(blockHash).getBlock().getData();
-            char per = 92;
-            String[] data = bd.toString().replace(per+"","separate").split("separate");
-            String transferID = transferId(data);
+            String transferID = t.getTransactionId();
             System.out.print("generated transfer id: " + transferID);
             return transferID;
         }
